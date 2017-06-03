@@ -12,7 +12,6 @@
 // Controller
 constexpr int k_controller = 0;
 
-// Controller axis deadband range
 constexpr double k_joystickDeadband = 0.02;
 
 /*
@@ -31,3 +30,7 @@ constexpr double k_turnNonLinearity = 1.0;
 constexpr double k_inertiaDampen = 2.5;
 constexpr double k_inertiaHighTurn = 3.0;
 constexpr double k_inertiaLowTurn = 3.0;
+
+// Solenoids
+constexpr int k_confettiPrimer = 0;
+constexpr int k_confettiEject = 1;

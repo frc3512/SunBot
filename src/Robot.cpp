@@ -7,6 +7,8 @@
 using namespace std::chrono_literals;
 
 void SunBot::OperatorControl() {
+    confettiPrimer.Set(true);
+    confettiEject.Set(false);
     while (IsOperatorControl() && IsEnabled()) {
         if (controller.GetStickButton(GenericHID::kLeftHand)) {
             robotDrive.Drive(controller.GetY(GenericHID::kLeftHand),
@@ -17,6 +19,16 @@ void SunBot::OperatorControl() {
                              controller.GetX(GenericHID::kRightHand) * 0.5,
                              controller.GetStickButton(GenericHID::kRightHand));
         }
+        if (controllerButtons.HeldButton(5) &&
+            controllerButtons.PressedButton(3)) {
+            confettiPrimer.Set(false);
+            confettiEject.Set(true);
+        }
+        if (controllerButtons.PressedButton(4)) {
+            confettiEject.Set(false);
+            confettiPrimer.Set(true);
+        }
+        controllerButtons.Update();
         std::this_thread::sleep_for(10ms);
     }
 }
