@@ -10,3 +10,7 @@ constexpr int k_controller = 0;
 // Motor
 constexpr int k_leftDrive = 0;
 constexpr int k_rightDrive = 1;
+
+// Solenoids
+constexpr int k_confettiPrimer = 6;
+constexpr int k_confettiEject = 7;
