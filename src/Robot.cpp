@@ -7,10 +7,21 @@
 using namespace std::chrono_literals;
 
 void SunBot::OperatorControl() {
+    confettiPrimer.Set(true);
+    confettiEject.Set(false);
     while (IsOperatorControl() && IsEnabled()) {
         robotDrive.ArcadeDrive(controller.GetY(GenericHID::kLeftHand),
                                controller.GetX(GenericHID::kRightHand));
-        std::this_thread::sleep_for(10ms);
+        if (controllerButtons.PressedButton(controller.kStickLeft) &&
+            controllerButtons.PressedButton(controller.kX)) {
+            confettiPrimer.Set(false);
+            confettiEject.Set(true);
+        }
+        if (controllerButtons.PressedButton(controller.kY)) {
+            confettiEject.Set(false);
+            confettiPrimer.Set(true);
+        }
+        controllerButtons.Update();
     }
 }
 
