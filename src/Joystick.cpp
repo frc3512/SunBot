@@ -1,9 +1,4 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) FIRST 2008-2017. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
+// Copyright (c) 2008-2017 FRC Team 3512, Spartatroniks. All Rights Reserved.
 
 #include "Joystick.h"
 
@@ -25,16 +20,16 @@ using namespace frc;
  *             (0-5).
  */
 Joystick::Joystick(int port) : Joystick(port, kNumAxisTypes, kNumButtonTypes) {
-  m_axes[kXAxis] = kXAxis;
-  m_axes[kYAxis] = kYAxis;
-  m_axes[kZAxis] = kZAxis;
-  m_axes[kTwistAxis] = kTwistAxis;
-  m_axes[kThrottleAxis] = kThrottleAxis;
+    m_axes[kXAxis] = kXAxis;
+    m_axes[kYAxis] = kYAxis;
+    m_axes[kZAxis] = kZAxis;
+    m_axes[kTwistAxis] = kTwistAxis;
+    m_axes[kThrottleAxis] = kThrottleAxis;
 
-  m_buttons[kTrigger] = kTrigger;
-  m_buttons[kTop] = kTop;
+    m_buttons[kTrigger] = kTrigger;
+    m_buttons[kTop] = kTop;
 
-  HAL_Report(HALUsageReporting::kResourceType_Joystick, port);
+    HAL_Report(HALUsageReporting::kResourceType_Joystick, port);
 }
 
 /**
@@ -63,7 +58,7 @@ Joystick::Joystick(int port, int numAxisTypes, int numButtonTypes)
  *             here to complete the GenericHID interface.
  */
 double Joystick::GetX(JoystickHand hand) const {
-  return GetRawAxis(m_axes[kXAxis]);
+    return GetRawAxis(m_axes[kXAxis]);
 }
 
 /**
@@ -75,7 +70,7 @@ double Joystick::GetX(JoystickHand hand) const {
  *             here to complete the GenericHID interface.
  */
 double Joystick::GetY(JoystickHand hand) const {
-  return GetRawAxis(m_axes[kYAxis]);
+    return GetRawAxis(m_axes[kYAxis]);
 }
 
 /**
@@ -84,7 +79,7 @@ double Joystick::GetY(JoystickHand hand) const {
  * This depends on the mapping of the joystick connected to the current port.
  */
 double Joystick::GetZ(JoystickHand hand) const {
-  return GetRawAxis(m_axes[kZAxis]);
+    return GetRawAxis(m_axes[kZAxis]);
 }
 
 /**
@@ -100,7 +95,7 @@ double Joystick::GetTwist() const { return GetRawAxis(m_axes[kTwistAxis]); }
  * This depends on the mapping of the joystick connected to the current port.
  */
 double Joystick::GetThrottle() const {
-  return GetRawAxis(m_axes[kThrottleAxis]);
+    return GetRawAxis(m_axes[kThrottleAxis]);
 }
 
 /**
@@ -114,21 +109,21 @@ double Joystick::GetThrottle() const {
  * @return The value of the axis.
  */
 double Joystick::GetAxis(AxisType axis) const {
-  switch (axis) {
-    case kXAxis:
-      return GetX();
-    case kYAxis:
-      return GetY();
-    case kZAxis:
-      return GetZ();
-    case kTwistAxis:
-      return GetTwist();
-    case kThrottleAxis:
-      return GetThrottle();
-    default:
-      wpi_setWPIError(BadJoystickAxis);
-      return 0.0;
-  }
+    switch (axis) {
+        case kXAxis:
+            return GetX();
+        case kYAxis:
+            return GetY();
+        case kZAxis:
+            return GetZ();
+        case kTwistAxis:
+            return GetTwist();
+        case kThrottleAxis:
+            return GetThrottle();
+        default:
+            wpi_setWPIError(BadJoystickAxis);
+            return 0.0;
+    }
 }
 
 /**
@@ -144,7 +139,7 @@ int Joystick::GetAxisCount() const { return m_ds.GetStickAxisCount(GetPort()); }
  * @return the axis type of a joystick axis.
  */
 int Joystick::GetAxisType(int axis) const {
-  return m_ds.GetJoystickAxisType(GetPort(), axis);
+    return m_ds.GetJoystickAxisType(GetPort(), axis);
 }
 
 /**
@@ -153,7 +148,7 @@ int Joystick::GetAxisType(int axis) const {
  * @return the number of buttons on the current joystick
  */
 int Joystick::GetButtonCount() const {
-  return m_ds.GetStickButtonCount(GetPort());
+    return m_ds.GetStickButtonCount(GetPort());
 }
 
 /**
@@ -171,7 +166,7 @@ int Joystick::GetAxisChannel(AxisType axis) const { return m_axes[axis]; }
  * @param channel The channel to set the axis to.
  */
 void Joystick::SetAxisChannel(AxisType axis, int channel) {
-  m_axes[axis] = channel;
+    m_axes[axis] = channel;
 }
 
 /**
@@ -183,7 +178,7 @@ void Joystick::SetAxisChannel(AxisType axis, int channel) {
  * @return The state of the button.
  */
 bool Joystick::GetButton(ButtonType button) const {
-  return GetRawButton(m_buttons[button]);
+    return GetRawButton(m_buttons[button]);
 }
 
 /**
@@ -194,7 +189,7 @@ bool Joystick::GetButton(ButtonType button) const {
  * @return Whether the button was pressed since the last check.
  */
 bool Joystick::ButtonPressed(ButtonType button) {
-  return RawButtonPressed(m_buttons[button]);
+    return RawButtonPressed(m_buttons[button]);
 }
 
 /**
@@ -205,7 +200,7 @@ bool Joystick::ButtonPressed(ButtonType button) {
  * @return Whether the button was released since the last check.
  */
 bool Joystick::ButtonReleased(ButtonType button) {
-  return RawButtonReleased(m_buttons[button]);
+    return RawButtonReleased(m_buttons[button]);
 }
 
 /**
@@ -215,7 +210,7 @@ bool Joystick::ButtonReleased(ButtonType button) {
  * @return The magnitude of the direction vector
  */
 double Joystick::GetMagnitude() const {
-  return std::sqrt(std::pow(GetX(), 2) + std::pow(GetY(), 2));
+    return std::sqrt(std::pow(GetX(), 2) + std::pow(GetY(), 2));
 }
 
 /**
@@ -225,7 +220,7 @@ double Joystick::GetMagnitude() const {
  * @return The direction of the vector in radians
  */
 double Joystick::GetDirectionRadians() const {
-  return std::atan2(GetX(), -GetY());
+    return std::atan2(GetX(), -GetY());
 }
 
 /**
@@ -238,5 +233,5 @@ double Joystick::GetDirectionRadians() const {
  * @return The direction of the vector in degrees
  */
 double Joystick::GetDirectionDegrees() const {
-  return (180 / M_PI) * GetDirectionRadians();
+    return (180 / M_PI) * GetDirectionRadians();
 }

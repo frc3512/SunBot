@@ -1,9 +1,4 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) FIRST 2016-2017. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
+// Copyright (c) 2016-2017 FRC Team 3512, Spartatroniks. All Rights Reserved.
 
 #include "GenericHID.h"
 
@@ -14,10 +9,10 @@
 using namespace frc;
 
 GenericHID::GenericHID(int port) : m_ds(DriverStation::GetInstance()) {
-  if (port >= DriverStation::kJoystickPorts) {
-    wpi_setWPIError(BadJoystickIndex);
-  }
-  m_port = port;
+    if (port >= DriverStation::kJoystickPorts) {
+        wpi_setWPIError(BadJoystickIndex);
+    }
+    m_port = port;
 }
 
 /**
@@ -27,7 +22,7 @@ GenericHID::GenericHID(int port) : m_ds(DriverStation::GetInstance()) {
  * @return The value of the axis.
  */
 double GenericHID::GetRawAxis(int axis) const {
-  return m_ds.GetStickAxis(m_port, axis);
+    return m_ds.GetStickAxis(m_port, axis);
 }
 
 /**
@@ -41,7 +36,7 @@ double GenericHID::GetRawAxis(int axis) const {
  * @return The state of the button.
  */
 bool GenericHID::GetRawButton(int button) const {
-  return m_ds.GetStickButton(m_port, button);
+    return m_ds.GetStickButton(m_port, button);
 }
 
 /**
@@ -52,7 +47,7 @@ bool GenericHID::GetRawButton(int button) const {
  * @return Whether the button was pressed since the last check.
  */
 bool GenericHID::RawButtonPressed(int button) {
-  return m_ds.GetStickButtonPressed(m_port, button);
+    return m_ds.GetStickButtonPressed(m_port, button);
 }
 
 /**
@@ -63,7 +58,7 @@ bool GenericHID::RawButtonPressed(int button) {
  * @return Whether the button was released since the last check.
  */
 bool GenericHID::RawButtonReleased(int button) {
-  return m_ds.GetStickButtonReleased(m_port, button);
+    return m_ds.GetStickButtonReleased(m_port, button);
 }
 
 /**
@@ -76,7 +71,7 @@ bool GenericHID::RawButtonReleased(int button) {
  * @return the angle of the POV in degrees, or -1 if the POV is not pressed.
  */
 int GenericHID::GetPOV(int pov) const {
-  return m_ds.GetStickPOV(GetPort(), pov);
+    return m_ds.GetStickPOV(GetPort(), pov);
 }
 
 /**
@@ -99,7 +94,7 @@ int GenericHID::GetPort() const { return m_port; }
  * @return the type of the HID.
  */
 GenericHID::HIDType GenericHID::GetType() const {
-  return static_cast<HIDType>(m_ds.GetJoystickType(m_port));
+    return static_cast<HIDType>(m_ds.GetJoystickType(m_port));
 }
 
 /**
@@ -117,10 +112,10 @@ std::string GenericHID::GetName() const { return m_ds.GetJoystickName(m_port); }
  */
 
 void GenericHID::SetOutput(int outputNumber, bool value) {
-  m_outputs =
-      (m_outputs & ~(1 << (outputNumber - 1))) | (value << (outputNumber - 1));
+    m_outputs = (m_outputs & ~(1 << (outputNumber - 1))) |
+                (value << (outputNumber - 1));
 
-  HAL_SetJoystickOutputs(m_port, m_outputs, m_leftRumble, m_rightRumble);
+    HAL_SetJoystickOutputs(m_port, m_outputs, m_leftRumble, m_rightRumble);
 }
 
 /**
@@ -129,8 +124,8 @@ void GenericHID::SetOutput(int outputNumber, bool value) {
  * @param value The 32 bit output value (1 bit for each output)
  */
 void GenericHID::SetOutputs(int value) {
-  m_outputs = value;
-  HAL_SetJoystickOutputs(m_port, m_outputs, m_leftRumble, m_rightRumble);
+    m_outputs = value;
+    HAL_SetJoystickOutputs(m_port, m_outputs, m_leftRumble, m_rightRumble);
 }
 
 /**
@@ -142,14 +137,14 @@ void GenericHID::SetOutputs(int value) {
  * @param value The normalized value (0 to 1) to set the rumble to
  */
 void GenericHID::SetRumble(RumbleType type, double value) {
-  if (value < 0)
-    value = 0;
-  else if (value > 1)
-    value = 1;
-  if (type == kLeftRumble) {
-    m_leftRumble = value * 65535;
-  } else {
-    m_rightRumble = value * 65535;
-  }
-  HAL_SetJoystickOutputs(m_port, m_outputs, m_leftRumble, m_rightRumble);
+    if (value < 0)
+        value = 0;
+    else if (value > 1)
+        value = 1;
+    if (type == kLeftRumble) {
+        m_leftRumble = value * 65535;
+    } else {
+        m_rightRumble = value * 65535;
+    }
+    HAL_SetJoystickOutputs(m_port, m_outputs, m_leftRumble, m_rightRumble);
 }
