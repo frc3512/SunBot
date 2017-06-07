@@ -1,9 +1,4 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) FIRST 2016-2017. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
+// Copyright (c) 2017 FRC Team 3512, Spartatroniks. All Rights Reserved.
 
 #include "XboxController.h"
 
@@ -20,8 +15,8 @@ using namespace frc;
  *             into (0-5).
  */
 XboxController::XboxController(int port) : GenericHID(port) {
-  // HAL_Report(HALUsageReporting::kResourceType_XboxController, port);
-  HAL_Report(HALUsageReporting::kResourceType_Joystick, port);
+    // HAL_Report(HALUsageReporting::kResourceType_XboxController, port);
+    HAL_Report(HALUsageReporting::kResourceType_Joystick, port);
 }
 
 /**
@@ -30,11 +25,11 @@ XboxController::XboxController(int port) : GenericHID(port) {
  * @param hand Side of controller whose value should be returned.
  */
 double XboxController::GetX(JoystickHand hand) const {
-  if (hand == kLeftHand) {
-    return GetRawAxis(0);
-  } else {
-    return GetRawAxis(4);
-  }
+    if (hand == kLeftHand) {
+        return GetRawAxis(0);
+    } else {
+        return GetRawAxis(4);
+    }
 }
 
 /**
@@ -43,11 +38,11 @@ double XboxController::GetX(JoystickHand hand) const {
  * @param hand Side of controller whose value should be returned.
  */
 double XboxController::GetY(JoystickHand hand) const {
-  if (hand == kLeftHand) {
-    return GetRawAxis(1);
-  } else {
-    return GetRawAxis(5);
-  }
+    if (hand == kLeftHand) {
+        return GetRawAxis(1);
+    } else {
+        return GetRawAxis(5);
+    }
 }
 
 /**
@@ -56,11 +51,11 @@ double XboxController::GetY(JoystickHand hand) const {
  * @param hand Side of controller whose value should be returned.
  */
 double XboxController::GetTriggerAxis(JoystickHand hand) const {
-  if (hand == kLeftHand) {
-    return GetRawAxis(2);
-  } else {
-    return GetRawAxis(3);
-  }
+    if (hand == kLeftHand) {
+        return GetRawAxis(2);
+    } else {
+        return GetRawAxis(3);
+    }
 }
 
 /**
@@ -72,7 +67,7 @@ double XboxController::GetTriggerAxis(JoystickHand hand) const {
  * @return The state of the button.
  */
 bool XboxController::GetButton(ButtonType button, JoystickHand hand) const {
-  return GetRawButton(GetButtonIndex(button, hand));
+    return GetRawButton(GetButtonIndex(button, hand));
 }
 
 /**
@@ -83,7 +78,7 @@ bool XboxController::GetButton(ButtonType button, JoystickHand hand) const {
  * @return Whether the button was pressed since the last check.
  */
 bool XboxController::ButtonPressed(ButtonType button, JoystickHand hand) {
-  return RawButtonPressed(GetButtonIndex(button, hand));
+    return RawButtonPressed(GetButtonIndex(button, hand));
 }
 
 /**
@@ -94,26 +89,26 @@ bool XboxController::ButtonPressed(ButtonType button, JoystickHand hand) {
  * @return Whether the button was released since the last check.
  */
 bool XboxController::ButtonReleased(ButtonType button, JoystickHand hand) {
-  return RawButtonReleased(GetButtonIndex(button, hand));
+    return RawButtonReleased(GetButtonIndex(button, hand));
 }
 
 /**
  * Returns button index corresponding to a button type
  */
 int XboxController::GetButtonIndex(ButtonType button, JoystickHand hand) const {
-  if (button == kBumper) {
-    if (hand == kLeftHand) {
-      return kBumperLeft;
+    if (button == kBumper) {
+        if (hand == kLeftHand) {
+            return kBumperLeft;
+        } else {
+            return kBumperRight;
+        }
+    } else if (button == kStick) {
+        if (hand == kLeftHand) {
+            return kStickLeft;
+        } else {
+            return kStickRight;
+        }
     } else {
-      return kBumperRight;
+        return button;
     }
-  } else if (button == kStick) {
-    if (hand == kLeftHand) {
-      return kStickLeft;
-    } else {
-      return kStickRight;
-    }
-  } else {
-    return button;
-  }
 }

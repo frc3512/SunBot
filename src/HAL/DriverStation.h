@@ -1,9 +1,4 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) FIRST 2013-2017. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
+// Copyright (c) 2017 FRC Team 3512, Spartatroniks. All Rights Reserved.
 
 #pragma once
 
@@ -16,7 +11,7 @@
 #define HAL_IO_CONFIG_DATA_SIZE 32
 #define HAL_SYS_STATUS_DATA_SIZE 44
 #define HAL_USER_STATUS_DATA_SIZE \
-  (984 - HAL_IO_CONFIG_DATA_SIZE - HAL_SYS_STATUS_DATA_SIZE)
+    (984 - HAL_IO_CONFIG_DATA_SIZE - HAL_SYS_STATUS_DATA_SIZE)
 
 #define HALFRC_NetworkCommunication_DynamicType_DSEnhancedIO_Input 17
 #define HALFRC_NetworkCommunication_DynamicType_DSEnhancedIO_Output 18
@@ -29,22 +24,22 @@
 #define HALFRC_NetworkCommunication_DynamicType_Kinect_Custom 25
 
 struct HAL_ControlWord {
-  uint32_t enabled : 1;
-  uint32_t autonomous : 1;
-  uint32_t test : 1;
-  uint32_t eStop : 1;
-  uint32_t fmsAttached : 1;
-  uint32_t dsAttached : 1;
-  uint32_t control_reserved : 26;
+    uint32_t enabled : 1;
+    uint32_t autonomous : 1;
+    uint32_t test : 1;
+    uint32_t eStop : 1;
+    uint32_t fmsAttached : 1;
+    uint32_t dsAttached : 1;
+    uint32_t control_reserved : 26;
 };
 
 enum HAL_AllianceStationID : int32_t {
-  HAL_AllianceStationID_kRed1,
-  HAL_AllianceStationID_kRed2,
-  HAL_AllianceStationID_kRed3,
-  HAL_AllianceStationID_kBlue1,
-  HAL_AllianceStationID_kBlue2,
-  HAL_AllianceStationID_kBlue3,
+    HAL_AllianceStationID_kRed1,
+    HAL_AllianceStationID_kRed2,
+    HAL_AllianceStationID_kRed3,
+    HAL_AllianceStationID_kBlue1,
+    HAL_AllianceStationID_kBlue2,
+    HAL_AllianceStationID_kBlue3,
 };
 
 /* The maximum number of axes that will be stored in a single HALJoystickAxes
@@ -55,28 +50,28 @@ enum HAL_AllianceStationID : int32_t {
 #define HAL_kMaxJoystickPOVs 12
 
 struct HAL_JoystickAxes {
-  int16_t count;
-  float axes[HAL_kMaxJoystickAxes];
+    int16_t count;
+    float axes[HAL_kMaxJoystickAxes];
 };
 
 struct HAL_JoystickPOVs {
-  int16_t count;
-  int16_t povs[HAL_kMaxJoystickPOVs];
+    int16_t count;
+    int16_t povs[HAL_kMaxJoystickPOVs];
 };
 
 struct HAL_JoystickButtons {
-  uint32_t buttons;
-  uint8_t count;
+    uint32_t buttons;
+    uint8_t count;
 };
 
 struct HAL_JoystickDescriptor {
-  uint8_t isXbox;
-  uint8_t type;
-  char name[256];
-  uint8_t axisCount;
-  uint8_t axisTypes[HAL_kMaxJoystickAxes];
-  uint8_t buttonCount;
-  uint8_t povCount;
+    uint8_t isXbox;
+    uint8_t type;
+    char name[256];
+    uint8_t axisCount;
+    uint8_t axisTypes[HAL_kMaxJoystickAxes];
+    uint8_t buttonCount;
+    uint8_t povCount;
 };
 
 #ifdef __cplusplus
