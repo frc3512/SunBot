@@ -13,6 +13,5 @@ public:
     void OperatorControl() override;
 
 private:
-    frc::RobotDrive robotDrive{k_leftDrive, k_rightDrive};
     frc::XboxController controller{k_controller};
 };
