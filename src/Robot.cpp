@@ -8,8 +8,11 @@ using namespace std::chrono_literals;
 
 void SunBot::OperatorControl() {
     while (IsOperatorControl() && IsEnabled()) {
-        robotDrive.ArcadeDrive(controller.GetY(GenericHID::kLeftHand),
-                               controller.GetX(GenericHID::kRightHand));
+	if (controller.GetStickButton(GenericHID::kLeftHand)){
+	robotDrive.Drive(controller.GetY(GenericHID::kLeftHand), controller.GetX(GenericHID::kRightHand), controller.GetStickButton(GenericHID::kRightHand));
+} else {
+	robotDrive.Drive(controller.GetY(GenericHID::kLeftHand) * 0.5, controller.GetX(GenericHID::kRightHand) * 0.5, controller.GetStickButton(GenericHID::kRightHand));
+}
         std::this_thread::sleep_for(10ms);
     }
 }
