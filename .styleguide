@@ -37,6 +37,7 @@ includeCppSys {
 }
 
 includeOtherLibs {
+  ctrlib/
 }
 
 includeProject {
