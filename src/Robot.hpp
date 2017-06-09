@@ -2,17 +2,18 @@
 
 #pragma once
 
-#include <RobotDrive.h>
+#include <ctrlib/CANTalon.h>
 #include <SampleRobot.h>
 #include <XboxController.h>
+#include "DriveTrain.hpp"
 
 #include "Constants.hpp"
 
-class SunBot : public frc::SampleRobot {
+class SunBot : public SampleRobot {
 public:
     void OperatorControl() override;
 
 private:
-    frc::RobotDrive robotDrive{k_leftDrive, k_rightDrive};
+    DriveTrain robotDrive;
     frc::XboxController controller{k_controller};
 };
