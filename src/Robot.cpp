@@ -6,10 +6,18 @@
 
 using namespace std::chrono_literals;
 
+SunBot::SunBot() {
+	timer.Start();
+}
+
 void SunBot::OperatorControl() {
-    confettiPrimer.Set(true);
+	// Defaut state: Door and lift lowered, confetti barrel sealed.
+	lift.Set(frc::DoubleSolenoid::kForward);
+	door.Set(frc::DoubleSolenoid::kReverse);
+    confettiPrimer.Set(false);
     confettiEject.Set(false);
     while (IsOperatorControl() && IsEnabled()) {
+    	// Drive code
         if (controller.GetStickButton(GenericHID::kLeftHand)) {
             robotDrive.Drive(controller.GetY(GenericHID::kLeftHand),
                              controller.GetX(GenericHID::kRightHand),
@@ -19,15 +27,20 @@ void SunBot::OperatorControl() {
                              controller.GetX(GenericHID::kRightHand) * 0.5,
                              controller.GetStickButton(GenericHID::kRightHand));
         }
-        if (controllerButtons.HeldButton(5) &&
-            controllerButtons.PressedButton(3)) {
-            confettiPrimer.Set(false);
-            confettiEject.Set(true);
-        }
-        if (controllerButtons.PressedButton(4)) {
-            confettiEject.Set(false);
+
+        // Primes confetti shooter on X press
+        if (controllerButtons.PressedButton(3)) {
             confettiPrimer.Set(true);
+            confettiEject.Set(false);
         }
+        // Fires confetti on Y press
+        if (controllerButtons.PressedButton(4)) {
+            confettiEject.Set(true);
+            confettiPrimer.Set(false);
+        }
+
+        AwardLift();
+
         controllerButtons.Update();
         std::this_thread::sleep_for(10ms);
     }

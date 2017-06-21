@@ -9,6 +9,9 @@
  * > Other (i.e. miscellaneous constants)
  */
 
+// TODO: Create enums mapping out XboxController buttons, then fix the control
+// scheme
+
 // Controller
 constexpr int k_controller = 0;
 
@@ -34,3 +37,7 @@ constexpr double k_inertiaLowTurn = 3.0;
 // Solenoids
 constexpr int k_confettiPrimer = 0;
 constexpr int k_confettiEject = 1;
+constexpr int k_doorUp = 2;
+constexpr int k_doorDown = 3;
+constexpr int k_liftDown = 4;
+constexpr int k_liftUp = 5;
