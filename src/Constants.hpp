@@ -9,6 +9,14 @@
  * > Other (i.e. miscellaneous constants)
  */
 
+// TODO: Create enums mapping out XboxController buttons, then fix the control
+// scheme
+
+/* Order of subsystem constants:
+ * > Motor IDs
+ * > Other (i.e. miscellaneous constants)
+ */
+
 // Controller
 constexpr int k_controller = 0;
 
