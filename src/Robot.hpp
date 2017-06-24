@@ -10,10 +10,12 @@
 #include <Solenoid.h>
 #include <Timer.h>
 #include <ctrlib/CANTalon.h>
+#include <Timer.h>
 
 #include "ButtonTracker.hpp"
 #include "Constants.hpp"
 #include "DriveTrain.hpp"
+#include "mindsensors.h"
 #include "XboxController.h"
 
 class SunBot : public SampleRobot {
@@ -33,4 +35,5 @@ private:
     DoubleSolenoid door{k_doorUp, k_doorDown};
     DoubleSolenoid lift{k_liftDown, k_liftUp};
     Timer timer;
+    mindsensors::CANLight light{21};
 };
