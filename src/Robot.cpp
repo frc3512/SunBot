@@ -14,6 +14,11 @@ void SunBot::OperatorControl() {
     door.Set(frc::DoubleSolenoid::kReverse);
     confettiPrimer.Set(false);
     confettiEject.Set(false);
+    timer.Start();
+    light.ShowRGB(0, 0, 255);
+    light.WriteRegister(7, 1, 0, 0, 255);
+    light.WriteRegister(6, 1, 0, 0, 0);
+
     while (IsOperatorControl() && IsEnabled()) {
         // Drive code
         if (controller.GetStickButton(GenericHID::kLeftHand)) {
@@ -40,6 +45,13 @@ void SunBot::OperatorControl() {
         AwardLift();
 
         controllerButtons.Update();
+
+        if (timer.HasPeriodPassed(2)) {
+            std::cout << "Blink" << std::endl;
+            light.Fade(7, 6);
+            timer.Reset();
+        }
+
         std::this_thread::sleep_for(10ms);
     }
 }
