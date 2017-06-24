@@ -9,6 +9,11 @@ using namespace std::chrono_literals;
 void SunBot::OperatorControl() {
     confettiPrimer.Set(true);
     confettiEject.Set(false);
+    timer.Start();
+    light.ShowRGB(0, 0, 255);
+    light.WriteRegister(7, 1, 0, 0, 255);
+    light.WriteRegister(6, 1, 0, 0, 0);
+
     while (IsOperatorControl() && IsEnabled()) {
         if (controller.GetStickButton(GenericHID::kLeftHand)) {
             robotDrive.Drive(controller.GetY(GenericHID::kLeftHand),
@@ -28,7 +33,13 @@ void SunBot::OperatorControl() {
             confettiEject.Set(false);
             confettiPrimer.Set(true);
         }
-        controllerButtons.Update();
+
+        if (timer.HasPeriodPassed(2)){
+            std::cout << "Blink" << std::endl;
+            light.Fade(7, 6);
+            timer.Reset();
+        }
+
         std::this_thread::sleep_for(10ms);
     }
 }

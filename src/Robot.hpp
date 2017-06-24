@@ -8,10 +8,12 @@
 #include <SampleRobot.h>
 #include <Solenoid.h>
 #include <ctrlib/CANTalon.h>
+#include <Timer.h>
 
 #include "ButtonTracker.hpp"
 #include "Constants.hpp"
 #include "DriveTrain.hpp"
+#include "mindsensors.h"
 #include "XboxController.h"
 
 class SunBot : public SampleRobot {
@@ -24,4 +26,6 @@ private:
     ButtonTracker controllerButtons{k_controller};
     Solenoid confettiEject{k_confettiEject};
     Solenoid confettiPrimer{k_confettiPrimer};
+    frc::Timer timer;
+    mindsensors::CANLight light{21};
 };
