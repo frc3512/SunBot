@@ -6,7 +6,13 @@
 
 using namespace std::chrono_literals;
 
-SunBot::SunBot() { timer.Start(); }
+SunBot::SunBot() {
+    timer.Start();
+    light.ShowRGB(0, 0, 255);
+    light.WriteRegister(7, 1, 0, 0, 255);
+    light.WriteRegister(6, 1, 0, 0, 0);
+    light.Fade(7, 6);
+}
 
 void SunBot::OperatorControl() {
     // Defaut state: Door and lift lowered, confetti barrel sealed.
@@ -15,9 +21,6 @@ void SunBot::OperatorControl() {
     confettiPrimer.Set(false);
     confettiEject.Set(false);
     timer.Start();
-    light.ShowRGB(0, 0, 255);
-    light.WriteRegister(7, 1, 0, 0, 255);
-    light.WriteRegister(6, 1, 0, 0, 0);
 
     while (IsOperatorControl() && IsEnabled()) {
         // Drive code
@@ -45,12 +48,6 @@ void SunBot::OperatorControl() {
         AwardLift();
 
         controllerButtons.Update();
-
-        if (timer.HasPeriodPassed(2)) {
-            std::cout << "Blink" << std::endl;
-            light.Fade(7, 6);
-            timer.Reset();
-        }
 
         std::this_thread::sleep_for(10ms);
     }
