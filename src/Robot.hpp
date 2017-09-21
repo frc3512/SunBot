@@ -9,7 +9,6 @@
 #include <SampleRobot.h>
 #include <Solenoid.h>
 #include <Timer.h>
-#include <Timer.h>
 #include <ctrlib/CANTalon.h>
 
 #include "ButtonTracker.hpp"
