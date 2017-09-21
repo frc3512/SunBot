@@ -25,6 +25,7 @@ public:
     void OperatorControl() override;
 
     void AwardLift();
+    void Lights();
 
 private:
     DriveTrain robotDrive;
