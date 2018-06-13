@@ -3,7 +3,6 @@ cHeaderFileInclude {
 }
 
 cppHeaderFileInclude {
-  \.h$
   \.hpp$
   \.inl$
 }
@@ -12,6 +11,13 @@ cppSrcFileInclude {
   \.cpp$
 }
 
+modifiableFileExclude {
+  WPILib/
+  gradle/
+}
+
 includeOtherLibs {
-  ctrlib/
+  CtrlSys/
+  cscore\.h$
+  ctre/
 }
