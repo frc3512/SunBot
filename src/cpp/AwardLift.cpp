@@ -3,6 +3,8 @@
 #include "Constants.hpp"
 #include "Robot.hpp"
 
+#include <iostream>
+
 enum class State { Idle, DoorUp, AwardUp, AwardDown };
 
 void SunBot::AwardLift() {
