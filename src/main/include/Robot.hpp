@@ -47,6 +47,10 @@ private:
 
     // First port is down and second port is up
     frc::DoubleSolenoid lift{4, 5};
+
     frc2::Timer timer;
+
+    // Blinkin LED driver
+    // See https://www.revrobotics.com/content/docs/REV-11-1105-UM.pdf
     frc::Spark light{1};
 };
