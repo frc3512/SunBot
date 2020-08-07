@@ -1,7 +1,3 @@
-cHeaderFileInclude {
-  \.h$
-}
-
 cppHeaderFileInclude {
   \.h$
   \.hpp$
@@ -12,6 +8,12 @@ cppSrcFileInclude {
   \.cpp$
 }
 
+modifiableFileExclude {
+  gradle/
+}
+
 includeOtherLibs {
-  ctrlib/
+  ctre/
+  frc/
+  frc2/
 }
