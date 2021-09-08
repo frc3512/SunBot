@@ -1,13 +1,10 @@
-// Copyright (c) 2017-2020 FRC Team 3512. All Rights Reserved.
+// Copyright (c) 2017-2021 FRC Team 3512. All Rights Reserved.
 
 #pragma once
-
-#include <array>
 
 #include <ctre/phoenix/motorcontrol/can/WPI_TalonSRX.h>
 #include <frc/DoubleSolenoid.h>
 #include <frc/Solenoid.h>
-#include <frc/Spark.h>
 #include <frc/SpeedControllerGroup.h>
 #include <frc/TimedRobot.h>
 #include <frc/XboxController.h>
@@ -24,10 +21,6 @@ public:
     void AwardLift();
 
 private:
-    // Colors: off, red, blue, yellow, green, purple, orange, white
-    static constexpr std::array<double, 8> kColors = {0.99, 0.61, 0.87, 0.69,
-                                                      0.77, 0.91, 0.65, 0.93};
-
     ctre::phoenix::motorcontrol::can::WPI_TalonSRX frontLeftMotor{1};
     ctre::phoenix::motorcontrol::can::WPI_TalonSRX frontRightMotor{13};
     ctre::phoenix::motorcontrol::can::WPI_TalonSRX rearLeftMotor{2};
@@ -49,8 +42,4 @@ private:
     frc::DoubleSolenoid lift{4, 5};
 
     frc2::Timer timer;
-
-    // Blinkin LED driver
-    // See https://www.revrobotics.com/content/docs/REV-11-1105-UM.pdf
-    frc::Spark light{1};
 };
