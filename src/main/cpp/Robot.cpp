@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2020 FRC Team 3512. All Rights Reserved.
+// Copyright (c) 2017-2021 FRC Team 3512. All Rights Reserved.
 
 #include "Robot.hpp"
 
@@ -7,7 +7,6 @@ enum class State { kIdle, kDoorUp, kAwardUp, kAwardDown };
 Robot::Robot() {
     rightGrbx.SetInverted(true);
     timer.Start();
-    light.Set(0.99);  // Set lights to black
 }
 
 void Robot::TeleopInit() {
@@ -46,13 +45,6 @@ void Robot::TeleopPeriodic() {
     }
 
     AwardLift();
-
-    static int lightIndex = 0;
-    if (controller.GetBButtonPressed()) {
-        // Cycle through the color sequence
-        lightIndex = (lightIndex + 1) % kColors.size();
-        light.Set(kColors[lightIndex]);
-    }
 }
 
 void Robot::AwardLift() {
